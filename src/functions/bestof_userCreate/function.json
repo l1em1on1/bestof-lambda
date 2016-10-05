@@ -1,0 +1,7 @@
+{
+    "description": "Node.js example function",
+    "runtime": "nodejs",
+    "memory": 128,
+    "timeout": 5,
+    "role": "arn:aws:iam::513263774382:role/BestOf_Lambda_DynamoDB"
+}

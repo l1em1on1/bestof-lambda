@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "outDir": "",
+        "sourceMap": false,
+        "rootDirs": ["src/functions", "src/shared"],
+        "removeComments": true
+    }
+}

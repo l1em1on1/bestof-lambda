@@ -1,0 +1,8 @@
+{
+  "name": "BestOf",
+  "description": "BestOf Lambda functions",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::513263774382:role/BestOf_lambda_function",
+  "environment": {}
+}
