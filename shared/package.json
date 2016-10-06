@@ -1,0 +1,13 @@
+{
+    "name": "bestof-lambda-shared",
+    "version": "1.0.0",
+    "description": "Set of lambda functions for BestOf application",
+    "main": "index.js",
+    "author": "Lukasz Sawicki",
+    "license": "ISC",
+    "dependencies": {
+        "aws-sdk": "^2.6.6",
+        "inversify": "^2.0.0",
+        "reflect-metadata": "^0.1.8"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "name": "bestof-lambda-user-create",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Lukasz Sawicki",
+    "license": "ISC",
+    "dependencies": {}
+}

@@ -1,12 +1,8 @@
-functions
-!src/functions
-
-shared
-!src/shared
-
 typings/*
 
 node_modules
+
+*.js
 *.tfstate
 *.backup
 .DS_Store

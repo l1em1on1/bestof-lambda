@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "sourceMap": false,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+
+        "removeComments": true
+    },
+    "types": ["reflect-metadata"],
+    "exclude": [
+        "shared"
+    ]
+}
