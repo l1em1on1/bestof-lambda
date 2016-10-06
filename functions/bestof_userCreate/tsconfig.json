@@ -11,6 +11,8 @@
     },
     "types": ["reflect-metadata"],
     "exclude": [
-        "shared"
+        "shared",
+        "typings",
+        "node_modules"
     ]
 }
