@@ -3,5 +3,5 @@
     "runtime": "nodejs4.3",
     "memory": 128,
     "timeout": 5,
-    "role": "arn:aws:iam::513263774382:role/BestOf_Lambda_DynamoDB"
+    "role": "arn:aws:iam::513263774382:role/bestof_lambda"
 }

@@ -1,23 +1,31 @@
 /// <reference path="../../typings/index.d.ts" />
-
-import { DynamoDB } from "aws-sdk"
-import { injectable, inject, decorate } from "inversify";
 import "reflect-metadata";
 
-import { IProfiles } from "../interfaces";
+import { DynamoDB } from "aws-sdk"
+import { injectable, inject, named } from "inversify";
 
+import { IRequestCreateProfile, IProfiles, IRepository } from "../interfaces";
+
+@injectable()
 export class Profiles implements IProfiles {
-    private _dataClient: DynamoDB.DocumentClient;
+    private _repository: IRepository;
 
-    constructor(dataClient: DynamoDB.DocumentClient) {
-        this._dataClient = dataClient;
+    constructor(@inject("DynamoDBRepository") @named("Profiles") repository: IRepository) {
+        this._repository = repository;
     }
 
-    getProfiles(): any {
-        return " test " + (this._dataClient == null)
+    getProfiles(): Promise<any> {
+        return this._repository.list("username = :username", {":username": "l1em1on1"});
+    }
 
+
+    updateProfile() {
+
+    }
+
+    createProfile(profile: IRequestCreateProfile): Promise<any> {
+        console.log(profile);
+
+        return this._repository.add(profile);
     }
 }
-
-decorate(injectable(), Profiles);
-decorate(inject("DynamoDB.DocumentClient"), Profiles, 0);
