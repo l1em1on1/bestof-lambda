@@ -1,4 +1,3 @@
-/// <reference path="../../typings/index.d.ts" />
 import "reflect-metadata"
 
 import { DynamoDB } from "aws-sdk"

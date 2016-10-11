@@ -60,8 +60,7 @@ resource "aws_iam_policy" "bestof_policy_dynamodb_profiles" {
             ],
             "Resource": [
                 "${aws_dynamodb_table.bestof_dynamodb_profiles.arn}",
-                "${aws_dynamodb_table.bestof_dynamodb_profiles_in_topics.arn}",
-                "${aws_dynamodb_table.bestof_dynamodb_topics_has_profiles.arn}"
+                "${aws_dynamodb_table.bestof_dynamodb_profiles_in_topics.arn}"
             ]
         }
     ]

@@ -1,16 +1,22 @@
-/// <reference path="../typings/index.d.ts" />
-
 export interface IErrorHandler {
     handleError(error: any) : any; 
     isNoError(error: any, reject: (reason?: any) => void): boolean;
 }
 
-export interface IRequestCreateProfile {
+export interface IResponse {
+    status: string;
+    message?: string;
+}
+
+export interface IRequestProfileCreate {
     username: string;
     email: string;
     fullname: string;
+}
 
-    password: string;
+export interface IProfiles {
+    getProfile(username: string): Promise<IProfile>;
+    createProfile(profile: IRequestProfileCreate): Promise<IProfile>;
 }
 
 export interface IRepository {
@@ -19,11 +25,6 @@ export interface IRepository {
     list(filterExpression?: string, filterKeyValues?: {[key: string]: string}): Promise<any>;
     update(): any;
     delete(): any;
-}
-
-export interface IProfiles {
-    getProfiles(): Promise<any>;
-    createProfile(profile: IRequestCreateProfile): Promise<any>;
 }
 
 export interface ITopic {

@@ -13,9 +13,14 @@ resource "aws_dynamodb_table" "bestof_dynamodb_topics" {
     name = "BestOf_Topics"
     read_capacity = 1
     write_capacity = 1
-    hash_key = "topic"
+    hash_key = "topicId"
+    range_key = "topicName"
     attribute {
-      name = "topic"
+      name = "topicId"
+      type = "S"
+    }
+    attribute {
+      name = "topicName"
       type = "S"
     }
 }
@@ -25,29 +30,27 @@ resource "aws_dynamodb_table" "bestof_dynamodb_profiles_in_topics" {
     read_capacity = 1
     write_capacity = 1
     hash_key = "username"
-    range_key = "topic"
+    range_key = "topicId"
     attribute {
       name = "username"
       type = "S"
     }
     attribute {
-      name = "topic"
+      name = "topicId"
       type = "S"
     }
-}
-
-resource "aws_dynamodb_table" "bestof_dynamodb_topics_has_profiles" {
-    name = "BestOf_TopicsHasProfiles"
-    read_capacity = 1
-    write_capacity = 1
-    hash_key = "topic"
-    range_key = "username"
-    attribute {
-      name = "topic"
+    attribute
+    {
+      name = "userStatus"
       type = "S"
     }
-    attribute {
-      name = "username"
-      type = "S"
+    global_secondary_index {
+      name = "topicIdIndex"
+      hash_key = "topicId"
+      range_key = "userStatus"
+      write_capacity = 1
+      read_capacity = 1
+      projection_type = "INCLUDE"
+      non_key_attributes = [ "username" ]
     }
 }
