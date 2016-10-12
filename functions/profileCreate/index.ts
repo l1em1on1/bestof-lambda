@@ -10,15 +10,11 @@ export function handle(event: IRequestProfileCreate, context: Context, callback:
         context.fail("No event object");
     }
 
-    profiles.createProfile(event).catch(function(error) {
-        context.fail(error);
-    }).then(created => {
-       
-    }).catch(function(error) {
-       context.fail(error);
-    }).then(profiles => {
-        callback(null, {
-            "profiles": profiles
-        });
-    })
+    profiles.createProfile(event)
+        .then(createdProfile => {
+            callback(null, createdProfile);
+        })
+        .catch(function(error) {
+            callback(error, null);
+        })
 }

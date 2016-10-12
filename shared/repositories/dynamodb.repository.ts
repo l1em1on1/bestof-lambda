@@ -30,7 +30,7 @@ export class DynamoDBRepository implements IRepository {
         return new Promise<any>((resolve, reject) => {
             this._dataClient.get(params, (error: any, data: any) => {
                 if (this._errorHandler.isNoError(error, reject)) {
-                    resolve(data);
+                    resolve(data.Item);
                 }
             });
         });
@@ -46,7 +46,7 @@ export class DynamoDBRepository implements IRepository {
         return new Promise<any>((resolve, reject) => {
             this._dataClient.query(params, (error: any, data: any) => {
                 if (this._errorHandler.isNoError(error, reject)) {
-                    resolve(data);
+                    resolve(data.Item);
                 }
             });
         });
@@ -60,13 +60,13 @@ export class DynamoDBRepository implements IRepository {
         return new Promise<any>((resolve, reject) => {
             this._dataClient.scan(params, (error: any, data: any) => {
                 if (this._errorHandler.isNoError(error, reject)) {
-                    resolve(data);
+                    resolve(data.Item);
                 }
             });
         });
     }
 
-    add(item: any): Promise<any> {
+    upsert(item: any): Promise<any> {
         var params: DynamoDB.PutParam = {
             TableName: this._tableName,
             Item: item
@@ -81,7 +81,27 @@ export class DynamoDBRepository implements IRepository {
         });
     }
 
-    update() {}
+    add(item: any, uniqueKey: string): Promise<any> {
+        var params: DynamoDB.PutParam = {
+            TableName: this._tableName,
+            Item: item,
+            ConditionExpression: `attribute_not_exists(${uniqueKey})`
+        };
 
-    delete() {}
+        return new Promise<any>((resolve, reject) => {
+            this._dataClient.put(params, (error: any, data: any) => {
+                if (this._errorHandler.isNoError(error, reject)) {
+                    resolve(data);
+                }
+            });
+        });
+    }
+
+    update(item: any, key: {[someKey: string]: any}): Promise<any> {
+        return null;
+    }
+
+    delete(key: {[someKey: string]: any}): Promise<any> {
+        return null;
+    }
 }

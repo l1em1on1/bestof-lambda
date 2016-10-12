@@ -21,10 +21,11 @@ export interface IProfiles {
 
 export interface IRepository {
     get(key: {[someKey: string]: any}): Promise<any>;
-    add(item: any): Promise<any>;
+    add(item: any, uniqueKey: string): Promise<any>;
+    upsert(item: any): Promise<any>;
     list(filterExpression?: string, filterKeyValues?: {[key: string]: string}): Promise<any>;
-    update(): any;
-    delete(): any;
+    update(item: any, key: {[someKey: string]: any}): Promise<any>;
+    delete(key: {[someKey: string]: any}): Promise<any>;
 }
 
 export interface ITopic {
