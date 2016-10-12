@@ -31,8 +31,9 @@ export class Profiles implements IProfiles {
     }
 
     createProfile(profile: IRequestProfileCreate): Promise<IProfile> {
-        return this._repository.add(profile, this.UNIQUE_KEY_NAME).then(console.log).catch(reason => {
-            if (reason.code == "ConditionalCheckFailedException") return Promise.reject(this._errorHandler.handleError("PROFILE_ALREADY_EXISTED"));
+        return this._repository.add(profile, this.UNIQUE_KEY_NAME).catch(reason => {
+            if (reason.code === "ConditionalCheckFailedException")
+                return Promise.reject(this._errorHandler.handleError("PROFILE_CREATE_PROFILE_ALREADY_EXISTS"));
         }).then(result => {
             return this.getProfile(profile.username);
         });

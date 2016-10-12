@@ -1,13 +1,14 @@
 import { Context, Callback } from "aws-lambda"
-import { IProfiles, IRequestProfileCreate } from "./shared/interfaces"
+import { IProfiles, IRequestProfileCreate, IErrorHandler } from "./shared/interfaces"
 
 import kernel from "./shared/inversify.config"
 
 var profiles = kernel.get<IProfiles>("Profiles");
+var errorHandler = kernel.get<IErrorHandler>("GenericErrorHandler");
 
 export function handle(event: IRequestProfileCreate, context: Context, callback: Callback) {
-    if (event == null) {
-        context.fail("No event object");
+    if (Object.keys(event).length === 0) {
+        callback(errorHandler.handleError("PROFILE_CREATE_REQUEST_MISSING_INPUT"), null);
     }
 
     profiles.createProfile(event)
